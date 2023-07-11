@@ -51,13 +51,13 @@ regd_users.post("/login", (req, res) => {
 
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  if (!req.body.review) {
+  if (!req.query.review) {
     return res.status(400).json({ message: "Invalid request" });
   }
   let isbn = req.params.isbn;
   let book = books[isbn];
   if (book) {
-    books[isbn].reviews[req.username] = req.body.review;
+    books[isbn].reviews[req.username] = req.query.review;
     return res
       .status(200)
       .json({ message: "Review added/updated successfully" });
